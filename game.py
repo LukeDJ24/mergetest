@@ -233,31 +233,41 @@ def execute_drop(item_id):
             print("You cannot drop that")        
 
 def execute_attack(enemy_, item_id):
-    global enemies 
-    for item in inventory:
-        if item_id == item["id"]:
-            if str(item["type"]) in type_attack:
-                for enemyx in enemies:
-                    if enemy_ == enemyx["id"]:
-                        
-                        if item["type"] in enemyx["weak"]:
-                            enemyx["temp_hp"] = enemyx["temp_hp"] - int((2 * item["attack"]))
-                            print("that was super effective!")
-                            print(enemyx["name"] + " has " + str(enemyx["temp_hp"]) + " hp")
-                            break
-                        elif item["type"] in enemyx["resist"]: 
-                            enemyx["temp_hp"] = enemyx["temp_hp"] - int((0.5 * item["attack"]))
-                            print("that wasn't very effective...")
-                            print(enemyx["name"] + " has " + str(enemyx["temp_hp"]) + " hp")
-                            break
-                        else: 
-                            enemyx["temp_hp"] = enemyx["temp_hp"] -  item["attack"]
-                            print(enemyx["name"] + " has " + str(enemyx["temp_hp"]) + " hp")
-                            break
-                #these if statements above check the damage type and compare to whether the enemy is weak to it and
-                #does damage accordingly, 2x 0.5x or normal damage 
-        else:
-            print("You cannot attack with that")
+     global enemies 
+-    global temp_hp
+-    enemy_attack = 100
+-    for i in enemies:
+-        if enemy_ == i["id"]:
+-            enemy_attack = int(i["attack"])
+     for item in inventory:
+         if item_id == item["id"]:
+             if str(item["type"]) in type_attack:
+@@ -242,21 +244,15 @@ def execute_attack(enemy_, item_id):
+                             enemyx["temp_hp"] = enemyx["temp_hp"] - int((2 * item["attack"]))
+                             print("that was super effective!")
+                             print(enemyx["name"] + " has " + str(enemyx["temp_hp"]) + " hp")
+-                            temp_hp= (temp_hp - enemy_attack)
+-                            print("You've received a hit your health is now",temp_hp)
+                             break
+                         elif item["type"] in enemyx["resist"]: 
+                             enemyx["temp_hp"] = enemyx["temp_hp"] - int((0.5 * item["attack"]))
+                             print("that wasn't very effective...")
+                             print(enemyx["name"] + " has " + str(enemyx["temp_hp"]) + " hp")
+-                            temp_hp= (temp_hp - enemy_attack)
+-                            print("You've received a hit your health is now",temp_hp)
+                             break
+                         else: 
+                             enemyx["temp_hp"] = enemyx["temp_hp"] -  item["attack"]
+                             print(enemyx["name"] + " has " + str(enemyx["temp_hp"]) + " hp")
+-                            temp_hp= (temp_hp - enemy_attack)
+-                            print("You've received a hit your health is now",temp_hp)
+                             break
+                 #these if statements above check the damage type and compare to whether the enemy is weak to it and
+                 #does damage accordingly, 2x 0.5x or normal damage 
+@@ -277,6 +273,7 @@ def execute_use(item_id):
+                 break
+             else:
+                 print("You cannot use that item") 
 
 def execute_use(item_id):
     global hp 
