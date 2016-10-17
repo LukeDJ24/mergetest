@@ -107,5 +107,21 @@ enemy_test = {
     "drop": [item_fireball, item_bandage]
 
 } 
+enemy_harambe = {
+    "id": "harambe",
+
+    "name": "Harambe",
+
+    "weak": ["Fire"],
+
+    "resist": ["Slash"],
+
+    "attack": 50,
+
+    "hp": 150,
+
+    "temp_hp": 150, 
     
-    
+    "drop": [item_fireball, item_bandage]
+
+} 

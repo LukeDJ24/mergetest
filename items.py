@@ -8,7 +8,7 @@ item_dagger = {
 
     "type": "Stab",
 
-    "attack": 10,
+    "attack": 30,
 
     "cost": 20
     }
