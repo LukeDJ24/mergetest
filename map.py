@@ -100,7 +100,9 @@ don't look like too much of an issue to get rid of, with the right tools at leas
 
         "min enemy": 1,
 
-        "check_item": item_wood_block 
+        "check_item": item_wood_block,
+
+        "enemy_present": [] 
 
 }
 room_castle = {
@@ -124,7 +126,10 @@ on the walls and bloody arrows everywhere. There's clearly been a battle here.""
 
         "min enemy": 3,
 
-        "check_item": [] 
+        "check_item": [],
+
+        "enemy_present": []
+
         }
 
 room_zoo = {
@@ -145,11 +150,13 @@ amongst the graffiti: "Dicks Out!". What this means is unknown to you.""",
 
         "enemy": [enemy_kobold],
 
-        "max enemy": 2,
+        "max enemy": 1,
 
         "min enemy": 1,
 
-        "check_item": [] 
+        "check_item": [],
+
+        "enemy_present": [] 
 
         }
 
@@ -161,7 +168,7 @@ room_harambe = {
 on his thrown, the anarchy of the situation is clear, with blood and corpsers of previous challengers laiden on the ground.
 There are cages to the left and right of him, with children caged up inside. It is no fake warlord you are fighting here.""",
 
-        "exits": {"south": "Cinncinati Zoo"},
+        "exits": {},
 
         "items": [],
 
@@ -169,13 +176,15 @@ There are cages to the left and right of him, with children caged up inside. It 
 
         "combat": True,
 
-        "enemy": [enemy_harambe],
+        "enemy": [enemy_kobold, enemy_bandit],
 
-        "max enemy": 2,
+        "max enemy": 3,
 
         "min enemy": 1,
 
-        "check_item": []  
+        "check_item": [],
+
+        "enemy_present": []  
 }
 
 room_forest = {
@@ -199,8 +208,11 @@ there is no life here. It feels cold and eary, once inside, escaping will be dif
 
         "min enemy": 2,
 
-        "check_item": item_axe 
-        }
+        "check_item": item_axe,
+
+        "enemy_present": []
+
+    }
 
 room_camp = {
         "name": "Camp",
@@ -223,7 +235,9 @@ some shady members.""",
 
         "min enemy": 2,
 
-        "check_item": []  
+        "check_item": [],
+
+        "enemy_present": []
 }
 room_clearing_two = {
         "name": "Clearing2",

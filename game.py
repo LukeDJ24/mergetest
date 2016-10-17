@@ -21,14 +21,18 @@ def class_decide(question):
     print("choose a class from: Warrior, Mage, Rogue, Cleric")
     reply = str(input(question + '(w/m/r/c)' + " to decide:")).lower().strip()
     #asks user what class they want to choose by asking them to input single characters 
-    if reply[0] == 'w':
+    if len(reply) < 1: 
+        class_decide("please enter ")
+    elif reply[0] == 'w':
         inventory = warrior["inventory"] 
         hp = warrior["hp"]
         temp_hp = warrior["temp_hp"]
+
     elif reply[0] == 'm':
         inventory = mage["inventory"]
         hp = mage["hp"]
         temp_hp = mage["temp_hp"]
+
     elif reply[0] == 'r':
         inventory = rogue["inventory"]
         hp = rogue["hp"]
@@ -38,8 +42,8 @@ def class_decide(question):
         hp = cleric["hp"]
         temp_hp = cleric["temp_hp"]
         #sets the global variables to equal those defined in the player module
-    else:
-        class_decide("please enter ") 
+    # elif reply == None:
+    #     class_decide("please enter ") 
         
 def list_of_items(items):
     return ", ".join(i["name"] for i in items) 
@@ -54,15 +58,16 @@ def print_inventory_items(items):
     #tells the user what items they have in their inventory 
     print("You have " + str(list_of_items(items)) + ".") 
     print("") 
+
 def yes_or_no(question):
     #declares function for asking the user a closed question 
     reply = str(input(question+' (y/n): ')).lower().strip()
-    if reply[0] == 'y':
-        return True
-    if reply[0] == 'n':
-        return False
-    else:
+    if len(reply) < 1:
         return yes_or_no("please enter y/n")
+    elif reply[0] == 'y':
+        return True
+    elif reply[0] == 'n':
+        return False
     #loops through until they answer with either y/n 
 
 def print_enemies(enemies):
@@ -79,6 +84,7 @@ def print_enemies(enemies):
     #asks the user whether they want to fight the current enemies or flee for the time being
     if yes_or_no(question) == False:
         current_room = prev_room
+        print("You run back where you came from... Like a pussy.")
         print_room(current_room)
     else:
         return True       
@@ -99,6 +105,7 @@ def print_arena(enemies):
     for current in enemies:
         print(current["name"] + ":" + str(current["temp_hp"]))
         #prints the enemies along with their current hp
+
 def exit_leads_to(exits, direction):
     return rooms[exits[direction]]["name"]
 
@@ -227,11 +234,6 @@ def execute_drop(item_id):
 
 def execute_attack(enemy_, item_id):
     global enemies 
-    global temp_hp
-    enemy_attack = 100
-    for i in enemies:
-        if enemy_ == i["id"]:
-            enemy_attack = int(i["attack"])
     for item in inventory:
         if item_id == item["id"]:
             if str(item["type"]) in type_attack:
@@ -242,21 +244,15 @@ def execute_attack(enemy_, item_id):
                             enemyx["temp_hp"] = enemyx["temp_hp"] - int((2 * item["attack"]))
                             print("that was super effective!")
                             print(enemyx["name"] + " has " + str(enemyx["temp_hp"]) + " hp")
-                            temp_hp= (temp_hp - enemy_attack)
-                            print("You've received a hit your health is now",temp_hp)
                             break
                         elif item["type"] in enemyx["resist"]: 
                             enemyx["temp_hp"] = enemyx["temp_hp"] - int((0.5 * item["attack"]))
                             print("that wasn't very effective...")
                             print(enemyx["name"] + " has " + str(enemyx["temp_hp"]) + " hp")
-                            temp_hp= (temp_hp - enemy_attack)
-                            print("You've received a hit your health is now",temp_hp)
                             break
                         else: 
                             enemyx["temp_hp"] = enemyx["temp_hp"] -  item["attack"]
                             print(enemyx["name"] + " has " + str(enemyx["temp_hp"]) + " hp")
-                            temp_hp= (temp_hp - enemy_attack)
-                            print("You've received a hit your health is now",temp_hp)
                             break
                 #these if statements above check the damage type and compare to whether the enemy is weak to it and
                 #does damage accordingly, 2x 0.5x or normal damage 
@@ -277,6 +273,7 @@ def execute_use(item_id):
                 break
             else:
                 print("You cannot use that item") 
+
 def execute_command(command):
 
     if 0 == len(command):
@@ -356,38 +353,37 @@ def combat_menu(inventory, enemies):
     return normalised_user_input 
     
 def combat():
-    global temp_hp
-    global current_room 
-    if current_room["combat"] == True:
-        global enemies
-        enemies = []
-        for x in range(current_room["min enemy"], current_room["max enemy"]):
-            temp_enemy = random.choice(current_room["enemy"])
-            if temp_enemy != None:
-                if temp_enemy not in enemies:
-                    enemies.append(temp_enemy)
-        if print_enemies(enemies) == True:
-            while True:
-                print_arena(enemies)
-                
-                command = combat_menu(inventory, enemies)
-                #print(command) 
-                execute_combat_command(command)
+	global current_room 
+	if current_room["combat"] == True:
+		global enemies
+		# enemies = []
+		if len(current_room["enemy_present"]) < 1:
+			enemies = []
+        	#enemies = current_room["enemy_present"]
+			for x in range(current_room["min enemy"], current_room["max enemy"]):
+				temp_enemy = random.choice(current_room["enemy"])
+				if temp_enemy not in current_room["enemy_present"]:
+						current_room["enemy_present"].append(temp_enemy)
+		# enemies = current_room["enemy_present"]
 
-                if temp_hp <1:
-                    print("You have lost!")
-                    raise SystemExit 
+		if print_enemies(current_room["enemy_present"]) == True:
+			while True:
+				print_arena(current_room["enemy_present"])
+	                
+				command = combat_menu(inventory, current_room["enemy_present"])
+	            #print(command) 
+				execute_combat_command(command)
 
-                for enemy_ in enemies:
-                    if enemy_["temp_hp"] < 1:
-                        print("You killed 1 " + enemy_["name"])
-                        enemy_["temp_hp"] = enemy_["hp"] 
-                        enemies.remove(enemy_)
-                if len(enemies) == 0:
-                    current_room["combat"] = False
-                    break
-    else:
-        return None
+				for enemy_ in current_room["enemy_present"]:
+					if enemy_["temp_hp"] < 1:
+						print("You killed 1 " + enemy_["name"])
+						enemy_["temp_hp"] = enemy_["hp"] 
+						current_room["enemy_present"].remove(enemy_)
+				if len(current_room["enemy_present"]) == 0:
+					current_room["combat"] = False
+					break
+	else:
+		return None
                     
         
         
@@ -396,6 +392,7 @@ def main():
     global prev_room
 
     class_decide("Use ")
+
     # Main game loop
     while True:
         # Display game status (room description, inventory etc.)
@@ -411,5 +408,6 @@ def main():
         execute_command(command)
 
 if __name__ == "__main__":
+	
     main() 
     
