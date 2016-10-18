@@ -9,6 +9,7 @@ There is a new notice on the billboard that outlines:
 The Ancient Cinncinati Legend has rampaged the area north of the castle and has had
 his goons take a young lad by name of Isiah and locked him in the castle, he must be stopped!
 A plentiful sum will be offered.
+
 Signed - KS.""",
 
     "exits": {"west": "General Store", "east": "Bar"},
@@ -88,7 +89,7 @@ room_bridge = {
 
         "description":
         """You come across a path, with beaten roads and snapped branches. You notice a raging river ahead and an old broken up bridge.
-        Nothing you can't fix with the right materials, even a 5 year old engineer could do it! Looking past the bridge you see the castle past the river and hear the faint crys of Isiah."""
+        Nothing you can't fix with the right materials, even a 5 year old engineer could do it! Looking past the bridge you see the castle past the river and hear the faint crys of Isiah.""",
 
 
         "exits": {"south": "General Store", "north": "Castle"},
@@ -316,5 +317,5 @@ rooms = {
         "Forest": room_forest,
         "Camp": room_camp,
         "Clearing": room_clearing,
-        "Clearing2": room_clearing_two
+        "Clearing2": room_festival_grounds
 }
