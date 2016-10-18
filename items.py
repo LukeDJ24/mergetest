@@ -30,7 +30,7 @@ item_helping_hand = {
     "name": "Helping Hand",
 
     "description":
-    """ Use to get into areas you sometimes may not be ready for""",
+    """ Use to get into areas you sometimes may not be ready for.""",
 
     "type": "None",
 
@@ -51,10 +51,10 @@ item_mace = {
 
     "cost": 20
     }
-item_restoration = {
+item_restoration_potion = {
     "id": "restore",
 
-    "name": "Restoration",
+    "name": "Restoration Potion",
 
     "description":
     """Used to restore health""",
@@ -65,24 +65,24 @@ item_restoration = {
 
     "cost": 30
     } 
-item_princess = {
-    "id": "princess",
+item_isiah = {
+    "id": "isiah",
 
-    "name": "Princess",
+    "name": "Isiah",
 
     "description":
-    """ She's got Mario whipped""",
+    """A 4 year old lad from your village.""",
 
     "type": "None"
     }
 
-item_fireball = {
-    "id": "fireball",
+item_mage_staff = {
+    "id": "mage staff",
 
-    "name": "Fireball",
+    "name": "Mage Staff",
 
     "description":
-    """ its a fireball""",
+    """ Your mage staff is infused with the power of the fire elements shooting out fire balls""",
 
     "type": "Fire",
 
@@ -203,4 +203,3 @@ item_clairvoyence = {
 
     "cost": 50 
     }
-
