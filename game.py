@@ -268,8 +268,8 @@ def execute_attack(enemy_, item_id, enemies):
                             break
                 #these if statements above check the damage type and compare to whether the enemy is weak to it and
                 #does damage accordingly, 2x 0.5x or normal damage 
-        else:
-            print("You cannot attack with that")
+    if item_id != item["id"]:
+        print("You cannot attack with that!")
 
 def execute_use(item_id):
     global hp 
@@ -405,10 +405,6 @@ def activity():
 	global current_room
 	if current_room["name"] == "Bar":
 		bar_drink()
-	#elif current_room["name"] == "Festival Grounds":
-		#barfight()
-		##CHANGE THIS##
-		##SPACE FOR MORE##
 
 def bar_drink():
 	global temp_hp
