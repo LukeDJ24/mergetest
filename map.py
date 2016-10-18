@@ -1,19 +1,20 @@
 from items import *
 from enemy import * 
+
 room_home = {
     "name": "Home",
 
     "description":
     """You reside by your small home town, everything seems familiar, apart from one thing.
-There is a new notice on the billboard that outlines:
+There is a notice on the billboard that outlines:
 
-The Ancient Cinncinati Legend has rampaged the area north of the castle and has had
-his goons take a young lad by name of Isiah and locked him in the castle, he must be stopped!
-A plentiful sum will be offered.
+The Ancient Cinncinati Legend has rampaged the area north of the castle and may
+have had his goons also take the princess in castle, he must be stopped.
+a plentiful sum will be offered.
 
-Signed - KS.""",
+Kirill the Wisest.""",
 
-    "exits": {"west": "General Store", "east": "Bar"},
+    "exits": {"west": "General Store", "east": "Bar","north": "Forest"},
 
     "items": [],
 
@@ -36,8 +37,7 @@ room_bar = {
     "name": "Bar",
 
     "description":
-    """As you approach the bar you notice a rotten old sign hanging just above the door. You can faintly make out the words \'Liquor in the Front, Poker in the Back\'.
-    You step over a drunken reveler to enter the bar and as you enter you're taken back by the smell and the noise of men singing and playing games.""",
+    """It's a bar""",
 
     "exits": {"north": "Camp", "west": "Home"},
 
@@ -64,7 +64,7 @@ room_shop = {
     "description":
     """As you walk in, you hear the ting of the bell go off, you're in your local
 store, it sells everything a regular person would need. The shopkeep grumbles and
-raises his brow at you. "What you want?" """,
+raises his brow at you. "What you want?" """, 
 
     "exits": {"north": "Bridge", "east": "Home"},
 
@@ -89,9 +89,9 @@ room_bridge = {
         "name": "Bridge",
 
         "description":
-        """You come across a path, with beaten roads and snapped branches. You notice a raging river ahead and an old broken up bridge.
-        Nothing you can't fix with the right materials, even a 5 year old engineer could do it! Looking past the bridge you see the castle past the river and hear the faint crys of Isiah."""
-
+        """You come across a path, with beaten roads and snapped branches. You notice that
+the bridge connecting you to the castle as been blocked, by a multitude of wood panes, they
+don't look like too much of an issue to get rid of, with the right tools at least.""",
 
         "exits": {"south": "General Store", "north": "Castle"},
 
@@ -111,7 +111,7 @@ room_bridge = {
 
         "enemy_present": [],
 
-        "activity": [] 
+		"activity": [] 
 
 }
 room_castle = {
@@ -129,7 +129,7 @@ on the walls and bloody arrows everywhere. There's clearly been a battle here.""
 
         "combat": True,
 
-        "enemy": [enemy_bandit, enemy_rufian, enemy_rogue_knight, enemy_castle_mage],
+        "enemy": [enemy_bandit, enemy_ruffian, enemy_rogue_knight, enemy_castle_mage],
 
         "max enemy": 4,
 
@@ -246,7 +246,7 @@ some shady members.""",
 
         "combat": True,
 
-        "enemy": [enemy_bandit, enemy_kobold, enemy_rufian, enemy_test],
+        "enemy": [enemy_bandit, enemy_kobold, enemy_ruffian, enemy_test],
 
         "max enemy": 5,
 
@@ -258,13 +258,13 @@ some shady members.""",
 
 		"activity": []
 }
-room_festival_grounds = {
-        "name": "Festival Grounds",
+room_clearing_two = {
+        "name": "Clearing2",
 
         "description":
         """clearing""",
 
-        "exits": {"south": "Camp"},
+        "exits": {"south": "Camp"."west": "Cinncinati Zoo"},
 
         "items": [],
 

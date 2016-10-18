@@ -74,21 +74,29 @@ def yes_or_no(question):
 def print_enemies(enemies):
     global current_room
     global prev_room
+    global inventory
+    global temp_hp
     #declares variables globally to allow us to manipulate them 
+    print("Your health is",temp_hp,"\n")
     x = []
     for enemy_ in enemies:
         #enemy_ used so we dont colide with enemy module 
         x.append(enemy_["name"])
         #adds the enemies that are in the list so we print it off as a nice string. 
-    print("There is " + str(x) + " here.")
-    question = "Do you want to fight?"
-    #asks the user whether they want to fight the current enemies or flee for the time being
-    if yes_or_no(question) == False:
+    if len(inventory)==0:
         current_room = prev_room
-        print("You run back where you came from... Like a pussy.")
+        print("There are enemies ahead, arm yourself!")
         print_room(current_room)
     else:
-        return True       
+        print("There is " + str(x) + " here.")
+        question = "Do you want to fight?"
+        #asks the user whether they want to fight the current enemies or flee for the time being
+        if yes_or_no(question) == False:
+            current_room = prev_room
+            print("You run back where you came from... Like a pussy.")
+            print_room(current_room)
+        else:
+            return True       
 def print_room(room):
     # Display room name
     print("")
@@ -97,9 +105,12 @@ def print_room(room):
     # Display room description
     print(room["description"])
     print("")
+
+
     
     if len(room["items"]) != 0: 
         print_room_items(room) 
+
 
 
 def print_arena(enemies):
@@ -167,11 +178,11 @@ def execute_buy(item_id):
                 print("you have " + str(gold) + " gold")  
                 break
             else:
-                print("You don't have enough gold mate")
+                print("You don't have enough gold mate. You only have",str(gold))
+
                 
 def execute_sell(item_id):
     global gold 
-        
     for item in inventory:
         if item_id == item["id"]: 
             inventory.remove(item)
@@ -268,8 +279,6 @@ def execute_attack(enemy_, item_id, enemies):
                             break
                 #these if statements above check the damage type and compare to whether the enemy is weak to it and
                 #does damage accordingly, 2x 0.5x or normal damage 
-    if item_id != item["id"]:
-        print("You cannot attack with that!")
 
 def execute_use(item_id):
     global hp 
@@ -405,6 +414,10 @@ def activity():
 	global current_room
 	if current_room["name"] == "Bar":
 		bar_drink()
+	elif current_room["name"] == "Clearing2":
+		barfight()
+		##CHANGE THIS##
+		##SPACE FOR MORE##
 
 def bar_drink():
 	global temp_hp
@@ -469,7 +482,10 @@ def end_game():
 	print("Nojus Lenciauskas\n")
 	time.sleep(1.5)
 	print("Ben van Rooyen\n")
-	input()
+    time.sleep(1.5)
+    print("Rest In Peace Harambe 1999-2016\n")
+    input()
+
 
     
 def ascii():
